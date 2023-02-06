@@ -1,10 +1,6 @@
 icons_launcher:
   image_path: "assets/icon.png"
   platforms:
-    android:
-      enable: true
-    ios:
-      enable: true
     macos:
       enable: true
       image_path: "assets/icon_macos.png"

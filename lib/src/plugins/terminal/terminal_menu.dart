@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -54,6 +56,23 @@ class TerminalContextMenuState extends ConsumerState<TerminalContextMenu>
     setState(() {});
   }
 
+  String ctrlOrCmd(String rest) {
+    if (Platform.isMacOS) {
+      return '⌘+$rest';
+    } else {
+      return 'Ctrl+$rest';
+    }
+  }
+
+  // This is so that the keyboard shortcuts do not interfere with the terminal shortcuts (Ctrl-C, etc.)
+  String ctrlShiftOrCmd(String rest) {
+    if (Platform.isMacOS) {
+      return '⌘+$rest';
+    } else {
+      return 'Ctrl+Shift+$rest';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return cardBuilder(
@@ -64,7 +83,7 @@ class TerminalContextMenuState extends ConsumerState<TerminalContextMenu>
           ContextMenuButtonConfig(
             "Copy",
             icon: const Icon(Icons.copy),
-            shortcutLabel: 'Ctrl+C',
+            shortcutLabel: ctrlShiftOrCmd('C'),
             onPressed: terminalController.selection != null
                 ? () => handlePressed(context, _handleCopy)
                 : null,
@@ -75,7 +94,7 @@ class TerminalContextMenuState extends ConsumerState<TerminalContextMenu>
           ContextMenuButtonConfig(
             "Paste",
             icon: const Icon(Icons.paste),
-            shortcutLabel: 'Ctrl+V',
+            shortcutLabel: ctrlShiftOrCmd('V'),
             onPressed: () => handlePressed(context, _handlePaste),
           ),
         ),
@@ -84,7 +103,7 @@ class TerminalContextMenuState extends ConsumerState<TerminalContextMenu>
           ContextMenuButtonConfig(
             "Select All",
             icon: const Icon(Icons.select_all),
-            shortcutLabel: 'Ctrl+A',
+            shortcutLabel: ctrlShiftOrCmd('A'),
             onPressed: () => handlePressed(context, _handleSelectAll),
           ),
         ),
@@ -94,7 +113,7 @@ class TerminalContextMenuState extends ConsumerState<TerminalContextMenu>
           ContextMenuButtonConfig(
             "File Manager",
             icon: const Icon(Icons.folder_open),
-            shortcutLabel: 'Ctrl+Shift+F',
+            shortcutLabel: ctrlOrCmd('Shift+F'),
             onPressed: () => handlePressed(context, _handleOpenFileManager),
           ),
         ),
