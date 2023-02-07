@@ -1,16 +1,17 @@
-## TerminalStudio
+# TerminalStudio
 
 Terminal emulator written in **Flutter**.
 
-*Comming soon.*
+*Coming soon.*
 
-<img width="700px" src="https://raw.githubusercontent.com/TerminalStudio/studio/master/media/demo.png">
+![Screenshot](https://raw.githubusercontent.com/TerminalStudio/studio/master/media/demo.png)
 
-## Build 
-```
+## Build
+
+```sh
 git submodule update --init
 ```
 
-```
+```sh
 git pull --recurse-submodules
 ```
